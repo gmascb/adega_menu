@@ -1,0 +1,38 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Menu Adega</h1>
+
+<div id="products">
+  
+  <table style="border-collapse: collapse !important;">
+    <thead>
+      <td>Nome</td>
+      <td></td>
+      <td></td>
+      <td>Preço</td>
+      <td>Ações</td>
+    </thead>
+    <tbody>
+    <% @products.each do |product| %>
+      <%= render product %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<% if params[:admin].present? %>
+  <%= link_to "New product", new_product_path %>
+<% end %>
+
+<style>
+    table {
+        width: 600px;
+        border-collapse: collapse;
+    }
+
+    tr {
+        border-bottom: 1pt solid black;
+    }
+</style>
