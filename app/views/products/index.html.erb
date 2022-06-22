@@ -1,40 +1,87 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Menu Adega</h1>
+
+<div>
+  <h1>Gastro Bar <i style="font-size: 40px !important;" class="material-icons">restaurant_menu</i>
+    <i id="show-all" style="font-size: 40px !important;" class="material-icons">add</i>
+    <i id="hide-all" style="font-size: 40px !important;" class="material-icons">remove</i>
+  </h1>
+
+</div>
 
 <div id="products">
-  
-  <table class="striped" style="border-collapse: collapse !important;">
-    <thead>
-      <td>Nome</td>
-      <td></td>
-      <td></td>
-      <td>Preço</td>
-      <% if 1==1 || params[:admin].present? %>
-        <td>Ações</td>
-      <% end %>
-    </thead>
-    <tbody>
-    <% @products.each do |product| %>
-      <%= render product %>
+  <div id="categories">
+    <% @categories.each do |category| %>
+      <h5 style="padding: 20px; color: #049BE5; text-decoration: underline; cursor: pointer;" id="category-<%= category %>">
+        <%= category.humanize %>
+      </h5>
+      <div id="category-products-<%= category %>">
+        <% @products.where(category: category).each do |product| %>
+          <div class="item-menu" id="<%= dom_id product %>" style="border-top: 1pt solid black !important;">
+            <div style="display: flex; flex-direction: column;">
+              <%= product.name %>
+              <small>
+                <%= product.description %>
+              </small>
+            </div>
+            <div></div>
+            <div></div>
+            <div><%= sprintf('%.2f', product.price) %></div>
+            <% if params[:admin].present? %>
+              <div><%= link_to 'Editar', edit_product_path(id: product.id) %></div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-    </tbody>
-  </table>
+  </div>
 </div>
 
 <br>
 
-<% if 1==1 || params[:admin].present? %>
+<% if params[:admin].present? %>
   <%= link_to "New product", new_product_path %>
 <% end %>
 
 <style>
-    table {
-        width: 600px;
-        border-collapse: collapse;
-    }
-
-    tr {
-        border-bottom: 1pt solid black !important;
+    .item-menu{
+        display: flex;
+        justify-content: space-between;
+        border-top: 1pt solid black;
+        border-bottom: 1pt solid black;
     }
 </style>
+
+<script type="text/javascript" charset="utf-8">
+
+
+    <% @categories.each do |category| %>
+      let categoryHide<%= category %> = true;
+      $('#category-<%= category %>').on('click', function () {
+        var categoryProducts = "#category-products-<%= category %>";
+
+        if (categoryHide<%= category %> === false){
+          $(categoryProducts).hide();
+          categoryHide<%= category %> = true;
+        }else{
+          $(categoryProducts).show();
+          categoryHide<%= category %> = false;
+        }
+      });
+    <% end %>
+
+    $('#show-all').on('click', function () {
+      <% @categories.each do |cat| %>
+      var categoryProducts = '#category-products-<%= cat %>';
+        $(categoryProducts).show();
+      <% end %>
+    })
+
+    $('#hide-all').on('click', function () {
+      <% @categories.each do |cat| %>
+        var categoryProducts = '#category-products-<%= cat %>';
+        $(categoryProducts).hide();
+      <% end %>
+    })
+
+</script>

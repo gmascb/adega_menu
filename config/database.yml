@@ -32,6 +32,8 @@ default: &default
 development:
   <<: *default
   database: adega_menu_development
+  password: root
+  username: postgres
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -66,6 +68,8 @@ development:
 test:
   <<: *default
   database: adega_menu_test
+  password: root
+  username: postgres
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

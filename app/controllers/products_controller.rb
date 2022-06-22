@@ -5,7 +5,8 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @categories = Product.all.order(:category).pluck(:category).uniq
+    @products = Product.all.order(:category, :name)
   end
 
   # GET /products/1 or /products/1.json

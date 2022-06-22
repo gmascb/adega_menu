@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
-
     <title>AdegaMenu</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= favicon_link_tag 'wine.png' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <!-- Materialize -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
   </head>
 
   <body>
-  <image src="https://images.vexels.com/media/users/3/217150/isolated/lists/99202b015e888ea9acf7e5ffd8d714fc-derramando-vinho-desenho-de-linha-de-vinho.png"></image>
-
+    <image src="https://images.vexels.com/media/users/3/217150/isolated/lists/99202b015e888ea9acf7e5ffd8d714fc-derramando-vinho-desenho-de-linha-de-vinho.png"></image>
     <%= yield %>
-
-
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="js/materialize.min.js"></script>
   </body>
 </html>
 
 <style>
   body{
+      padding: 50px;
       background-color: #eaeaea;
   }
 </style>
