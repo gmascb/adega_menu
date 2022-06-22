@@ -18,7 +18,7 @@
       </h5>
       <div id="category-products-<%= cat %>">
         <% @products.where(category: category).each do |product| %>
-          <div class="item-menu" id="<%= dom_id product %>" style="border-top: 1pt solid black !important;">
+          <div class="item-menu" id="<%= dom_id product %>" style="border-top: 1pt solid black !important; <%= product.available ? '' : 'text-decoration:line-through;'  %>">
             <div style="display: flex; flex-direction: column;">
               <%= product.name %>
               <small>
