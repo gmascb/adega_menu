@@ -12,10 +12,11 @@
 <div id="products">
   <div id="categories">
     <% @categories.each do |category| %>
-      <h5 style="padding: 20px; color: #049BE5; text-decoration: underline; cursor: pointer;" id="category-<%= category %>">
+      <% cat = category.camelcase.gsub(' ','') %>
+      <h5 style="padding: 20px; color: #049BE5; text-decoration: underline; cursor: pointer;" id="category-<%= cat %>">
         <%= category.humanize %>
       </h5>
-      <div id="category-products-<%= category %>">
+      <div id="category-products-<%= cat %>">
         <% @products.where(category: category).each do |product| %>
           <div class="item-menu" id="<%= dom_id product %>" style="border-top: 1pt solid black !important;">
             <div style="display: flex; flex-direction: column;">
@@ -56,29 +57,32 @@
 
 
     <% @categories.each do |category| %>
-      let categoryHide<%= category %> = true;
-      $('#category-<%= category %>').on('click', function () {
-        var categoryProducts = "#category-products-<%= category %>";
+      <% cat = category.camelcase.gsub(' ','') %>
+      var categoryHide<%= cat %> = false;
+      $('#category-<%= cat %>').on('click', function () {
+        var categoryProducts = "#category-products-<%= cat %>";
 
-        if (categoryHide<%= category %> === false){
+        if (categoryHide<%= cat %> === false){
           $(categoryProducts).hide();
-          categoryHide<%= category %> = true;
+          categoryHide<%= cat %> = true;
         }else{
           $(categoryProducts).show();
-          categoryHide<%= category %> = false;
+          categoryHide<%= cat %> = false;
         }
       });
     <% end %>
 
     $('#show-all').on('click', function () {
-      <% @categories.each do |cat| %>
+      <% @categories.each do |category| %>
+      <% cat = category.camelcase.gsub(' ','') %>
       var categoryProducts = '#category-products-<%= cat %>';
         $(categoryProducts).show();
       <% end %>
     })
 
     $('#hide-all').on('click', function () {
-      <% @categories.each do |cat| %>
+      <% @categories.each do |category| %>
+        <% cat = category.camelcase.gsub(' ','') %>
         var categoryProducts = '#category-products-<%= cat %>';
         $(categoryProducts).hide();
       <% end %>

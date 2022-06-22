@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @categories = Product.all.order(:category).pluck(:category).uniq.map{ |a| a.gsub(' ','').underscore}
+    @categories = Product.all.order(:category).pluck(:category)
     @products = Product.all.order(:category, :name)
   end
 
