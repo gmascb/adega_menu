@@ -21,9 +21,9 @@
     <%= form.text_area :description %>
   </div>
 
-  <div>
+  <div style="display: flex;">
     <%= form.label :available, style: "display: block" %>
-    <%= form.check_box :available %>
+    <%= form.check_box :available, style: 'opacity: 1; position:initial; pointer-events: all; margin-left: 10px;' %>
   </div>
 
   <div>
@@ -40,3 +40,9 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<style>
+  div{
+      padding: 20px;
+  }
+</style>

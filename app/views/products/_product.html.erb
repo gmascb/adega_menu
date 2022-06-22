@@ -13,7 +13,7 @@
     <td>
       <%= product.price %>
     </td>
-    <% if params[:admin].present? %>
+    <% if 1==1 || params[:admin].present? %>
       <td>
         <%= link_to "Editar", edit_product_path(id: product.id) %>
       </td>
