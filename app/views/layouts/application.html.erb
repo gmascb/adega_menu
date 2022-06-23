@@ -22,14 +22,20 @@
   </head>
 
   <body>
-    <image src="https://images.vexels.com/media/users/3/217150/isolated/lists/99202b015e888ea9acf7e5ffd8d714fc-derramando-vinho-desenho-de-linha-de-vinho.png"></image>
-    <%= yield %>
+    <div style="margin-left:10px">
+      <%= image_tag('adega_logo-no-bg.png', size: "400x300")%>
+    </div>
+    <div class="body-padding">
+      <%= yield %>
+    </div>
   </body>
 </html>
 
 <style>
+  .body-padding{
+    padding: 0 30px 10px 30px;
+  }
   body{
-      padding: 50px;
       background-color: #eaeaea;
   }
 </style>
