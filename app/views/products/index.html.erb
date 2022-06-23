@@ -70,6 +70,7 @@
     $('#show-all').on('click', function () {
       <% @categories.each do |category| %>
       <% cat = category.camelcase.gsub(' ','') %>
+      categoryHide<%= cat %> = false;
       var categoryProducts = '#category-products-<%= cat %>';
         $(categoryProducts).show();
       <% end %>
@@ -78,6 +79,7 @@
     $('#hide-all').on('click', function () {
       <% @categories.each do |category| %>
         <% cat = category.camelcase.gsub(' ','') %>
+        categoryHide<%= cat %> = true;
         var categoryProducts = '#category-products-<%= cat %>';
         $(categoryProducts).hide();
       <% end %>
