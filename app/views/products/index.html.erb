@@ -1,14 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
-
-<div>
-  <h1>Gastro Bar <i style="font-size: 40px !important;" class="material-icons">restaurant_menu</i>
-    <i id="show-all" style="font-size: 40px !important;" class="material-icons">add</i>
-    <i id="hide-all" style="font-size: 40px !important;" class="material-icons">remove</i>
-  </h1>
-
+<div style="display: flex; justify-content: space-evenly;">
+  <i id="show-all" style="font-size: 40px !important;" class="material-icons">add</i>
+  <i id="hide-all" style="font-size: 40px !important;" class="material-icons">remove</i>
 </div>
-
 <div id="products">
   <div id="categories">
     <% @categories.each do |category| %>
