@@ -2,12 +2,10 @@
 
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy]
+  before_action :set_index, only: %i[index admin]
 
   # GET /products or /products.json
-  def index
-    @categories = Product.all.order(:category).pluck(:category)
-    @products = Product.all.order(:category, :name)
-  end
+  def index; end
 
   # GET /products/1 or /products/1.json
   def show; end
@@ -39,7 +37,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to products_path, notice: 'Product was successfully updated.' }
+        format.html { redirect_to admin_path, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,6 +56,10 @@ class ProductsController < ApplicationController
     end
   end
 
+  def admin
+    @admin = true
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -68,5 +70,10 @@ class ProductsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def product_params
     params.require(:product).permit(:name, :description, :available, :price, :category)
+  end
+
+  def set_index
+    @categories = Product.all.order(:category).pluck(:category)
+    @products = Product.all.order(:category, :name)
   end
 end

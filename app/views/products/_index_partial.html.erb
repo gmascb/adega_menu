@@ -1,0 +1,88 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="center-align" style="display: flex; justify-content: space-evenly;">
+  <i id="show-all" style="font-size: 40px !important;" class="material-icons">add</i>
+  <i id="hide-all" style="font-size: 40px !important;" class="material-icons">remove</i>
+</div>
+<div id="products">
+  <div id="categories">
+    <% @categories.each do |category| %>
+      <% cat = category.camelcase.gsub(' ','') %>
+      <h5 style="padding: 20px; color: #049BE5; text-decoration: underline; cursor: pointer;" id="category-<%= cat %>">
+        <%= category.humanize %>
+      </h5>
+      <div id="category-products-<%= cat %>" style="display: none;">
+        <% @products.where(category: category).each do |product| %>
+          <div class="item-menu" id="<%= dom_id product %>" style="border-top: 1pt solid black !important; <%= product.available ? '' : 'text-decoration:line-through;'  %>">
+            <div style="display: flex; flex-direction: column;">
+              <%= product.name %>
+              <small>
+                <%= product.description %>
+              </small>
+            </div>
+            <div></div>
+            <div></div>
+            <div><%= sprintf('%.2f', product.price) %></div>
+            <% if @admin %>
+              <div><%= link_to 'Editar', edit_product_path(id: product.id) %></div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<br>
+
+<% if @admin %>
+  <%= link_to "New product", new_product_path %>
+<% end %>
+
+<style>
+    .item-menu{
+        display: flex;
+        justify-content: space-between;
+        border-top: 1pt solid black;
+        border-bottom: 1pt solid black;
+    }
+</style>
+
+<script type="text/javascript" charset="utf-8">
+
+
+    <% @categories.each do |category| %>
+      <% cat = category.camelcase.gsub(' ','') %>
+      var categoryHide<%= cat %> = true;
+      $('#category-<%= cat %>').on('click', function () {
+        var categoryProducts = "#category-products-<%= cat %>";
+
+        if (categoryHide<%= cat %> === false){
+          $(categoryProducts).hide();
+          categoryHide<%= cat %> = true;
+        }else{
+          $(categoryProducts).show();
+          categoryHide<%= cat %> = false;
+        }
+      });
+    <% end %>
+
+    $('#show-all').on('click', function () {
+      <% @categories.each do |category| %>
+      <% cat = category.camelcase.gsub(' ','') %>
+      categoryHide<%= cat %> = false;
+      var categoryProducts = '#category-products-<%= cat %>';
+        $(categoryProducts).show();
+      <% end %>
+    })
+
+    $('#hide-all').on('click', function () {
+      <% @categories.each do |category| %>
+        <% cat = category.camelcase.gsub(' ','') %>
+        categoryHide<%= cat %> = true;
+        var categoryProducts = '#category-products-<%= cat %>';
+        $(categoryProducts).hide();
+      <% end %>
+    })
+
+</script>
